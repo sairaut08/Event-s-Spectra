@@ -3,6 +3,7 @@ import { FiMenu } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
+import logo from '../assets/Images/image-removebg-preview (2) (1).png'
 import Footer from "../components/footer";
 import { logout } from '../redux/slices/authSlice';
 
@@ -27,7 +28,7 @@ function HomeLayout({ children }) {
             {/* Fixed Navbar */}
             <nav className="bg-gray-800 p-4 fixed top-0 w-full z-50">
                 <div className="container mx-auto flex items-center justify-between">
-                    <Link to="/" className="text-white text-xl font-bold">Your Logo</Link>
+                <img src={logo} className='w-15 h-20 rounded ml-10 space-x-14' />
 
                     {/* Mobile Menu Toggle */}
                     <div className="lg:hidden">
