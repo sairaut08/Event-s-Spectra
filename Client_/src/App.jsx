@@ -14,6 +14,8 @@ function App() {
   
 
   return (
+
+    // routes 
     <Routes>
         <Route path='/' element={ <HomePage/> } />
         <Route path='/about-us' element={ <AboutUsPage/> } />
