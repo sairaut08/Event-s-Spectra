@@ -6,13 +6,13 @@ import upload from '../middleware/multerMiddleware.js'
 const router = Router()
 
 // ROUTES
-router.post('/register',upload.single('avatar'),register)
-router.post('/login',login)
-router.get('/logout',logout)
-router.get('/me',isLoggedIn,getProfile )
+router.post('/register',upload.single('avatar'),register) //tested
+router.post('/login',login) //tested
+router.get('/logout',logout) //tested
+router.get('/me',isLoggedIn,getProfile ) //tested
 router.post('/forgot-password',forgotPassword)
 router.post('/reset-password/:resetToken',resetPassword)
-router.post('/change-password',isLoggedIn,changePassword)
-router.post('/update',isLoggedIn,upload.single('avatar'),updateUser)
+router.post('/change-password',isLoggedIn,changePassword) //tested
+router.post('/update',isLoggedIn,upload.single('avatar'),updateUser) //tested
 
 export default router 

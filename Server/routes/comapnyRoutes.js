@@ -7,13 +7,13 @@ import {isLoggedIn,authorizedRoles} from '../middleware/authMiddleware.js'
 const router = new Router()
 
 router.route('/')
-.get(getAllCompany)
-.post(isLoggedIn,authorizedRoles('ADMIN'),createnewCompany)
+.get(getAllCompany) //tested
+.post(isLoggedIn,authorizedRoles('ADMIN'),createnewCompany) //tested
 
 router.route('/:id')
     .get(isLoggedIn)
-    .put(isLoggedIn,authorizedRoles('ADMIN'),updateCompany)
-    .delete(isLoggedIn,authorizedRoles('ADMIN'),removeCompany)
+    .put(isLoggedIn,authorizedRoles('ADMIN'),updateCompany) //tested
+    .delete(isLoggedIn,authorizedRoles('ADMIN'),removeCompany) //tested
     .post(isLoggedIn,authorizedRoles('ADMIN'))
 
 

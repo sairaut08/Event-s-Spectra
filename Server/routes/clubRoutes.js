@@ -1,31 +1,37 @@
 import {Router} from 'express'
-
-import { createClub,removeClub,getAllClubs, } from "../controllers/clubsController.js";
+import { createClub,removeClub,getAllClubs, getClubById, } from "../controllers/clubsController.js";
 import {isLoggedIn,authorizedRoles} from '../middleware/authMiddleware.js';
 import upload from '../middleware/multerMiddleware.js';
+import { createEvent, deleteEvent, getAllEvents } from '../controllers/eventController.js';
+import { register, unregister } from '../controllers/registartionController.js';
+
 const router = Router();
 
-router.route('/').get(getAllClubs)
+router.route('/').get(getAllClubs) //tested
 .post(
     isLoggedIn,
     authorizedRoles('ADMIN'),
     upload.single('thumbnail'),
-    createClub)
+    createClub) //tested
 
 
 router.route('/:id')
 
-//.get(isLoggedIn, getLectuersByCourseId)
+.get(isLoggedIn, getClubById) //tested
 
 .delete(isLoggedIn,
     authorizedRoles('ADMIN'),
-    removeClub)
-.post(
-    //addLectureToCourseById,
-    authorizedRoles('ADMIN'),
-    //isLoggedIn
-    upload.single('club')
+    removeClub) //tested
 
-)
+// event routes
+router.post('/:clubId/addEvent',isLoggedIn,authorizedRoles('ADMIN'),createEvent) //tested
+router.get('/:clubId/events',isLoggedIn,authorizedRoles('ADMIN'),getAllEvents) //tested
+router.delete('/:clubId/events/:eventId',isLoggedIn,authorizedRoles('ADMIN'),deleteEvent) //tested
+
+// registration routes
+router.post('/:clubId/events/:eventId/register',isLoggedIn,authorizedRoles('USER'),register)
+router.put('/:clubId/events/:eventId/unregister',isLoggedIn,authorizedRoles('USER'),unregister)
+
+
 
 export default router;

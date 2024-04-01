@@ -46,7 +46,7 @@ const createnewCompany = async(req,res)=>{
             message: 'Unable to add company !'
     })
     }
-    newCompany.save()
+    await newCompany.save()
     res.status(200).json({
         success: true,
         message: 'New Comapny Added Successfully!',
@@ -66,11 +66,12 @@ const updateCompany = async (req,res) =>{
             {
                 // overwrite all the parameters provided in body by user
                 $set: req.body
-            },
-            {
-                // validates parameters through the courseModel.js file
-                runValidators: true
             }
+            // ,
+            // {
+            //     // validates parameters through the courseModel.js file
+            //     runValidators: true
+            // }
         )
 
         if(!companyUpdated){
@@ -80,10 +81,14 @@ const updateCompany = async (req,res) =>{
         })
         }
 
+        await companyUpdated.save()
+
+        const getUpdatedCompany = await Company.findById(id)
+
         res.status(200).json({
             success: true,
             message: `company updated successfully !`,
-            companyUpdated
+            getUpdatedCompany
         })
     } catch (error) {
         res.status(500).json({
