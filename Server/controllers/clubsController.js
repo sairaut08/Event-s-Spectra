@@ -1,5 +1,4 @@
-import Club from "../models/clubsModel.js";
-import Course from "../models/clubsModel.js"
+import Club  from "../models/clubsModel.js";
 import AppError from "../utils/errorUtil.js";
 import cloudinary from 'cloudinary'
 
@@ -16,15 +15,15 @@ const getAllClubs = async function(req,res,next){
 }
 
 const createClub = async(req,res,next)=>{
-    const{clubName,event_id ,description} = req.body;
+    const{clubName ,description,tagline} = req.body;
     try {
-      if(!clubName || !description  ||event_id){
+      if(!clubName || !description || !tagline){
         return next(new AppError('All fields are required',400))
     }
       const club = await Club.create({
         clubName,
-    
         description,
+        tagline,
         thumbnail:{
          public_id:'Dummy',
          secure_url:'Dummy'
@@ -49,6 +48,7 @@ const createClub = async(req,res,next)=>{
     }
 
     await club.save();
+
     res.status(200).json({
         success : true,
         message:'Club created Successfully',
@@ -63,32 +63,55 @@ const createClub = async(req,res,next)=>{
       })
     }
    
-    }
+}
 
-    const removeClub = async(req,res,next)=>{
-        try {
-          const {id} = req.params;
-          const course = await Course.findById(id);
-          if(!course){
-            return next(new AppError('Course with given id does not exist',500))
-          }
-      
-          await Course.findByIdAndDelete(id);
-      
-          res.status(200).json({
-            success:true,
-            message:'course deleted Successfully'
-          })
-        } catch (error) {
-          return next(new AppError(error.message,500))
+const removeClub = async(req,res,next)=>{
+      try {
+        const {id} = req.params;
+        const course = await Club.findById(id);
+        if(!course){
+          return next(new AppError('Course with given id does not exist',500))
         }
+    
+        await Club.findByIdAndDelete(id);
+    
+        res.status(200).json({
+          success:true,
+          message:'Club deleted Successfully'
+        })
+      } catch (error) {
+        return next(new AppError(error.message,500))
       }
+}
 
-      export {
-        getAllClubs,
-     
-        createClub,
-        
-        removeClub,
-        
+const getClubById = async (req,res,next) => {
+    try {
+        const {id} = req.params
+
+        const club = await Club.findById(id)
+
+        if(!club){
+          return next(new AppError('Club with given ID does not exist'))
+        }
+
+        res.status(200).json({
+          success: true ,
+          message : 'Club found' ,
+          club
+        })
+
+    } catch (error) {
+      return next(new AppError(error.message,500))
     }
+}
+
+export {
+  getAllClubs,
+
+  createClub,
+  
+  removeClub,
+
+  getClubById
+  
+}

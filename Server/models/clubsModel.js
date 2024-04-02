@@ -15,22 +15,6 @@ const createClub = new Schema(
             required: [true, 'Description is required'],
             minlength: [20, 'Description must be atleast 20 characters long'],
           },
-          clubs: [
-            {
-              clubName: String,
-              description: String,
-              lecture: {
-                public_id: {
-                  type: String,
-                  required: true,
-                },
-                secure_url: {
-                  type: String,
-                  required: true,
-                },
-              },
-            },
-          ],
           thumbnail: {
             public_id: {
               type: String,
@@ -39,10 +23,14 @@ const createClub = new Schema(
               type: String,
             },
           },
-          numberOfEvents: {
-            type: Number,
-            default: 0,
-          },
+          eventId :[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref : 'event'
+          }],
+          tagline: {
+            type: String,
+            required: [true, 'Club name is required'],
+          }
           
         },
         {
