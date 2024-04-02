@@ -41,7 +41,7 @@ const ContactUsPage = () => {
 
             toast.promise(response,{
                 loading: 'Sending message ...' ,
-                error: (d) => d?.data?.message ,
+                error: 'failed to send message' ,
                 success: 'Message sent successfully !'
             })
 
