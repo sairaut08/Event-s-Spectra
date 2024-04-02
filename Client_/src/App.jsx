@@ -8,7 +8,7 @@ import Signup from './Pages/Signup'
 import Signin from './Pages/Signin'
 import ProfilePage from './Pages/ProfilePage'
 import ClubList from './Pages/Clubs/ClubList'
-
+import AccessDenied from './Pages/AccessDenied'
 
 function App() {
   
@@ -24,6 +24,7 @@ function App() {
         <Route path='/login' element={ <Signin/> } />
         <Route path='/user/profile' element={ <ProfilePage/> } />
         <Route path='/clubs' element={ <ClubList/> } />
+        <Route path='/denied' element={ <AccessDenied/> } />
 
 
         <Route path='*' element={<NotFound/> } />
