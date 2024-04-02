@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import connectToDB from './config/dbConnection.js'
 import userRoute from './routes/userRoutes.js'
 import clubRouter from './routes/clubRoutes.js'
+import otherRoutes from './routes/otherRoutes.js'
 import errorMiddleware from './middleware/errorMiddleware.js'
 import companyRoutes from './routes/comapnyRoutes.js'
 
@@ -39,6 +40,7 @@ app.use('/ping',(req,res)=>{
 app.use('/api/v1/user',userRoute)
 app.use('/api/v1/clubs',clubRouter)
 app.use('/api/v1/company',companyRoutes)
+app.use('/api/v1',otherRoutes)
 // app.use('/api/v1/payments',paymentRoute)
 
 app.all('*',(req,res)=>{    // if somebody enters url other than any route defined here 
