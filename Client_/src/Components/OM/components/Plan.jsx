@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Plan = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div className='max-w-[1400px] m-auto py-16 px-4 grid lg:grid-cols-2 gap-4'>
       {/* Left Side */}
@@ -41,11 +45,12 @@ const Plan = () => {
         Dive into a world of cultural wonders! Join us as we celebrate diversity, creativity, and unity in our upcoming cultural event. Let your talents shine and make unforgettable memories with us!
         </p>
         <div>
-        <button
+        {/* <button
           className='border-2 border-black mr-4 hover:shadow-2xl p-2 text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 rounded-lg'>
           Learn More
-        </button>
+        </button> */}
         <button
+        onClick={() => navigate('/clubs')}
           className='bg-black text-white border-2 border-black hover:bg-gray-800 hover:shadow-2xl p-2 text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 rounded-lg'>
           Participate
         </button>

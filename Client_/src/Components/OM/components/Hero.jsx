@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+
   return (
     <div className='w-full h-screen'>
       <img
@@ -18,7 +20,9 @@ const Hero = () => {
           <p className='max-w-[600px] drop-shadow-2xl py-2 text-xl'>
           Unleashing Talent, Celebrating Diversity: Join Us in Eventful Journeys!
           </p>
-          <button className='border-2 border-white mr-4 hover:shadow-2xl p-2 text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 rounded-lg text-white'>Explore</button>
+          {/* <button 
+            
+          className='border-2 border-white mr-4 hover:shadow-2xl p-2 text-lg transition duration-300 ease-in-out transform hover:-translate-y-1 rounded-lg text-white'>Explore</button> */}
         </div>
       </div>
     </div>

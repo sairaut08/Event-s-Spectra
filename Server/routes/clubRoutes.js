@@ -24,8 +24,10 @@ router.route('/:id')
     removeClub) //tested
 
 // event routes
-router.post('/:clubId/addEvent',isLoggedIn,authorizedRoles('ADMIN'),createEvent) //tested
-router.get('/:clubId/events',isLoggedIn,authorizedRoles('ADMIN'),getAllEvents) //tested
+router.post('/:clubId/addEvent',isLoggedIn,authorizedRoles('ADMIN'),upload.single('thumbnail'),createEvent) //tested
+router.get('/:clubId/events',isLoggedIn,
+// authorizedRoles('ADMIN'),
+getAllEvents) //tested
 router.delete('/:clubId/events/:eventId',isLoggedIn,authorizedRoles('ADMIN'),deleteEvent) //tested
 
 // registration routes

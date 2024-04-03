@@ -9,6 +9,7 @@ import Signin from './Pages/Signin'
 import ProfilePage from './Pages/ProfilePage'
 import ClubList from './Pages/Clubs/ClubList'
 import AccessDenied from './Pages/AccessDenied'
+import ClubDescription from './Pages/Clubs/ClubDescription'
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={ <Signin/> } />
         <Route path='/user/profile' element={ <ProfilePage/> } />
         <Route path='/clubs' element={ <ClubList/> } />
+        <Route path='/club/description' element={ <ClubDescription/> } />
         <Route path='/denied' element={ <AccessDenied/> } />
 
 

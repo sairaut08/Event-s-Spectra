@@ -45,7 +45,7 @@ const register = async(req,res,next) =>{
 
     // IMAGE  FILE UPLOAD
     if(req.file){
-        console.log(req.file);
+        // console.log(req.file);
         try {
             const result = await cloudinary.v2.uploader.upload(req.file.path,{
                 folder: 'lms',

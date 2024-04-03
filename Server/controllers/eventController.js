@@ -1,6 +1,7 @@
 import event from '../models/eventModel.js'
 import Club from '../models/clubsModel.js'
 import AppError from "../utils/errorUtil.js";
+import cloudinary from 'cloudinary'
 
 const createEvent = async (req,res,next) => {
     try {
@@ -19,6 +20,18 @@ const createEvent = async (req,res,next) => {
 
         if(!newEvent){
             return next(new AppError('error in creating new event',500))
+        }
+
+        if(req.file){
+            const result = await cloudinary.v2.uploader.upload(req.file.path,{
+                folder:'lms'
+            })
+          
+            if(result){
+              newEvent.thumbnail.public_id = result.public_id;
+              newEvent.thumbnail.secure_url = result.secure_url;
+            }
+          //  fs.rm(`../uploads/${req.file.filename}`)
         }
 
         // update event array in club

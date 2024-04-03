@@ -40,12 +40,12 @@ const createClub = async(req,res,next)=>{
             folder:'lms'
         })
       
-      if(result){
-        club.thumbnail.public_id = result.public_id;
-        club.thumbnail.secure_url = result.secure_url;
-      }
+        if(result){
+          club.thumbnail.public_id = result.public_id;
+          club.thumbnail.secure_url = result.secure_url;
+        }
       //  fs.rm(`../uploads/${req.file.filename}`)
-    }
+      }
 
     await club.save();
 
