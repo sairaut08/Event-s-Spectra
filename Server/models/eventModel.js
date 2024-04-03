@@ -19,6 +19,14 @@ const eventSchema = new mongoose.Schema({
         required : [true,'Description is required'],
         minLength: [5,'minLength should be atleast 5 characters']
     },
+    thumbnail: {
+        public_id: {
+          type: String,
+        },
+        secure_url: {
+          type: String,
+        },
+      },
     
     
 },{timestamps:true})
