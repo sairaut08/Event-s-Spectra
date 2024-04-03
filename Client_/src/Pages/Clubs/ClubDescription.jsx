@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import img from '../../assets/img1.jpg';
 import BaseLayout from '../../Layouts/BaseLayout';
 import axiosInstance from '../../Helpers/axiosInstance';
 import EventCard from '../../Components/SARVESH/EventCard';
