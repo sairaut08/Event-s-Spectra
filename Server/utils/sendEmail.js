@@ -1,28 +1,50 @@
 import nodemailer from "nodemailer";
+import {google} from 'googleapis'
 import { config } from 'dotenv'
 config()
+const CLIENT_ID = '992511193324-172vsgc76p33iiba773daqsudbk75c5u.apps.googleusercontent.com'
+const CLIENT_SECRET = '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'
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
+const REFRESH_TOKEN = '1//04wxu4BtzbYq8CgYIARAAGAQSNwF-L9IrNB9fHrwe_onWwEcyTaKEAPmkBujYHEwGzy3HxgU-aOxnMKX8pAs7gdw1evmufj9NWK4'
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI)
 
-
+oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
 // async..await is not allowed in global scope, must use a wrapper
-const sendEmail = async function (email, subject, message) {
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: process.env.SMTP_USERNAME,
-      pass: process.env.SMTP_PASSWORD,
-    }
-  });
 
-  // send mail with defined transport object
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM_EMAIL, // sender address
-    to: email, // user email
-    subject: subject, // Subject line
-    html: message, // html body
-  });
-};
+async function sendMail(email,subject,message) {
+  try {
+      const accessToken = await oAuth2Client.getAccessToken()
 
-export default sendEmail;
+      const transport = nodemailer.createTransport({
+          service : 'gmail',
+          auth : {
+              type : 'OAUTH2',
+              user : 'eventspectra7781@gmail.com',
+              clientId : CLIENT_ID,
+              clientSecret : CLIENT_SECRET,
+              refreshToken : REFRESH_TOKEN,
+              accessToken : accessToken
+          }
+      })
+
+      const mailOptions = {
+          from : `EVENTSPECTRA 📧 <eventspectra7781@gmail.com>`,
+
+          to : email,
+
+          subject : subject,
+
+          html : message
+
+
+      };
+
+      const result = await transport.sendMail(mailOptions);
+
+      return result
+
+  } catch (error) {
+      return error
+  }
+}
+export default sendMail;
