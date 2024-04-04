@@ -8,7 +8,7 @@ function ClubList() {
 
     const dispatch = useDispatch()
     const {clubData} = useSelector( state => state.clubs)
-
+    console.log(clubData);
     async function loadCourses () {
         await dispatch(getAllClubs())
     }

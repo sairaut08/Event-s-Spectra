@@ -59,9 +59,9 @@ const Navbar = () => {
             : 'fixed top-0 left-full ease-out duration-500 h-screen z-10'
         }
       >
-        <ul className='flex flex-col h-full items-center justify-center space-y-4'>
-          <li><Link to='/' onClick={() => setNav(false)}>Home</Link></li>
-          <li><Link to='/events' onClick={() => setNav(false)}>Events</Link></li> 
+        <ul className='flex flex-col h-full items-center justify-center space-y-4 text-xl'>
+          <li ><Link to='/' onClick={() => setNav(false)}>Home</Link></li>
+          {/* <li><Link to='/events' onClick={() => setNav(false)}>Events</Link></li>  */}
           <li><Link to='/clubs' onClick={() => setNav(false)}>Clubs</Link></li> 
 
 
