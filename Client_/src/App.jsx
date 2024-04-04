@@ -10,6 +10,8 @@ import ProfilePage from './Pages/ProfilePage'
 import ClubList from './Pages/Clubs/ClubList'
 import AccessDenied from './Pages/AccessDenied'
 import ClubDescription from './Pages/Clubs/ClubDescription'
+import RequireAuth from './Components/Auth/RequireAuth'
+import CreateClub from './Pages/Clubs/CreateClub'
 
 function App() {
   
@@ -28,6 +30,10 @@ function App() {
         <Route path='/club/description' element={ <ClubDescription/> } />
         <Route path='/denied' element={ <AccessDenied/> } />
 
+        {/* admin routes */}
+        <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>} >
+            <Route path='club/createClub' element={ <CreateClub/>} />
+        </Route>
 
         <Route path='*' element={<NotFound/> } />
     </Routes>
