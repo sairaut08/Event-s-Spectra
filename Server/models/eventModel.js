@@ -14,6 +14,10 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required : [true,'EventName is required']
     },
+    tagline:{
+        type: String,
+        required : [true,'Description is required'],
+    },
     description:{
         type: String,
         required : [true,'Description is required'],
@@ -26,7 +30,7 @@ const eventSchema = new mongoose.Schema({
         secure_url: {
           type: String,
         },
-      },
+    }
     
     
 },{timestamps:true})
