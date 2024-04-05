@@ -25,6 +25,22 @@ export const getAllClubs = createAsyncThunk('/clubs/get' , async () => {
     }
 })
 
+export const createClub = createAsyncThunk('/club/create' , async (data)=> {
+    try {
+        const response = axiosInstance.post('/clubs',data)
+
+        toast.promise(response,{
+            loading: 'Creating new club ...' ,
+            success: 'Club created successfully' ,
+            error: 'Error in creating club'
+        })
+
+        return (await response).data
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 const clubSlice = createSlice({
     name: 'clubs' ,
     initialState ,
