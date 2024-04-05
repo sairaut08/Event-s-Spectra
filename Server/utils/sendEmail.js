@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer')
-const {google} = require('googleapis')
+import nodemailer from 'nodemailer'
+import {google} from 'googleapis'
 
 const CLIENT_ID = '992511193324-172vsgc76p33iiba773daqsudbk75c5u.apps.googleusercontent.com'
 const CLIENT_SECRET = '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'
@@ -50,4 +50,4 @@ async function sendMail(email,subject,message) {
     }
 }
 
-module.exports = sendMail
+export default sendMail
