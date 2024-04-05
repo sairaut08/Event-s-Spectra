@@ -2,7 +2,7 @@ import AppError from "../utils/errorUtil.js"
 import user from "../models/userModel.js"
 import cloudinary from 'cloudinary'
 import fs from 'fs/promises'
-import sendEmail from "../utils/sendEmail.js"
+import sendMail from "../utils/sendEmail.js"
 import crypto from 'crypto'
 import { configDotenv } from "dotenv"
 
@@ -177,7 +177,7 @@ const forgotPassword = async (req,res,next) =>{
     const message = `You can reset your password by clicking <a href=${resetPasswordURL} target="_blank">Reset your password</a>\nIf the above link does not work for some reason then copy paste this link in new tab ${resetPasswordURL}.\n If you have not requested this, kindly ignore.`;
 
     try {   
-        await sendEmail(email,subject,message)
+        await sendMail(email,subject,message)
 
         res.status(200).json({
             success: true ,
