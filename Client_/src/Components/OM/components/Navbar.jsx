@@ -63,6 +63,11 @@ const Navbar = () => {
           <li ><Link to='/' onClick={() => setNav(false)}>Home</Link></li>
           {/* <li><Link to='/events' onClick={() => setNav(false)}>Events</Link></li>  */}
           <li><Link to='/clubs' onClick={() => setNav(false)}>Clubs</Link></li> 
+          {
+            isLoggedIn && role === 'ADMIN' && (
+              <li><Link to='/club/create-club' onClick={() => setNav(false)}>Create Club</Link></li>
+            )
+          }
 
 
           {

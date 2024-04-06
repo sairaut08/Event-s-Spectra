@@ -6,7 +6,7 @@ import ContactUsPage from './Pages/ContactUSPage'
 import NotFound from './Pages/NotFound'
 import Signup from './Pages/Signup'
 import Signin from './Pages/Signin'
-import ProfilePage from './Pages/ProfilePage'
+import ProfilePage from './Pages/User/ProfilePage'
 import ClubList from './Pages/Clubs/ClubList'
 import AccessDenied from './Pages/AccessDenied'
 import ClubDescription from './Pages/Clubs/ClubDescription'
@@ -32,9 +32,12 @@ function App() {
 
         {/* admin routes */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>} >
-            <Route path='club/createClub' element={ <CreateClub/>} />
+            <Route path='club/create-club' element={ <CreateClub/>} />
         </Route>
 
+        <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>} >
+            <Route path='/user/profile' element={ <ProfilePage/>} />
+        </Route>
         <Route path='*' element={<NotFound/> } />
     </Routes>
   
