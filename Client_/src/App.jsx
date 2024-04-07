@@ -12,6 +12,7 @@ import AccessDenied from './Pages/AccessDenied'
 import ClubDescription from './Pages/Clubs/ClubDescription'
 import RequireAuth from './Components/Auth/RequireAuth'
 import CreateClub from './Pages/Clubs/CreateClub'
+import EditProfile from './Pages/User/EditProfile'
 
 function App() {
   
@@ -37,7 +38,10 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>} >
             <Route path='/user/profile' element={ <ProfilePage/>} />
+            <Route path='/user/edit-profile' element={ <EditProfile/>} />
         </Route>
+
+
         <Route path='*' element={<NotFound/> } />
     </Routes>
   

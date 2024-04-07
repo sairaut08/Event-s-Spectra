@@ -7,7 +7,10 @@ import axiosInstance from "../../Helpers/axiosInstance";
 const initialState = {
     isLoggedIn : localStorage.getItem('isLoggedIn') || false ,
     role: localStorage.getItem('role') || '' ,
-    data: JSON.parse(localStorage.getItem('data') )|| {}
+    data: localStorage.getItem('data') || {}
+    // data: JSON.parse(localStorage.getItem('data') )|| {}
+    // data: localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : {}
+
 }
 
 export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
@@ -71,21 +74,37 @@ export const logout = createAsyncThunk("/auth/logout", async () => {
     }
 })
 
-// export const getProfile = createAsyncThunk('/auth/getProfile', async () => {
-//     try {
-//         const response = axiosInstance.get('/user/me')
+export const updateProfile = createAsyncThunk('/auth/user/update', async (data) => {
+    try {
+        const res = axiosInstance.post('/user/update', data)
 
-//         toast.promise(response,{
-//             loading : 'Wait ! Fetching your profile' ,
-//             success: (d) => d?.data?.message ,
-//             error: 'Failed to fetch details'
-//         })
+        toast.promise(res,{
+            loading: 'Updating profile ...' ,
+            error: 'Error in updating profile',
+            success: 'Profile updated successfully'
+        })
+
+        return (await res).data
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+export const getProfile = createAsyncThunk('/auth/getProfile', async () => {
+    try {
+        const response = axiosInstance.get('/user/me')
+
+        toast.promise(response,{
+            loading : 'Wait ! Fetching your profile' ,
+            success: (d) => d?.data?.message ,
+            error: 'Failed to fetch details'
+        })
             // this return becomes action.payload
-//         return (await response).data
-//     } catch (error) {
-//         toast.error(error?.response?.data?.message)
-//     }
-// })
+        return await response
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
 
 const authSlice = createSlice({
     name: 'auth' ,
@@ -108,10 +127,18 @@ const authSlice = createSlice({
             state.role = "";
             state.data = {};
         })
-        // .addCase(getProfile.fulfilled, (state,action) => {
-        //     localStorage.setItem('data',JSON.stringify(action?.payload?.userFromDB))
-        //     state.data = action?.payload
-        // })
+        .addCase(getProfile.fulfilled, (state,action) => {
+
+            localStorage.setItem("data", JSON.stringify(action?.payload?.data));
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("role", action?.payload?.data?.userFromDB?.role);
+
+            state.isLoggedIn = true;
+            state.role = action?.payload?.data?.userFromDB?.role;
+            state.data = action?.payload?.data?.userFromDB;
+
+            
+        })
     }
 })
 
