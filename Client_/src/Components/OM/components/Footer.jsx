@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import { TiSocialPinterest } from 'react-icons/ti';
+import {Link} from 'react-router-dom'
 
 const Footer = () => {
 
@@ -21,10 +22,33 @@ const Footer = () => {
         <div>
           <h6 className='font-bold uppercare pt-2'>ABOUT</h6>
           <ul>
-            <li className='py-1'>About KITCoEK</li>
-            <li className='py-1'>Founder Trustees</li>
-            <li className='py-1'>Board Of Directors</li>
-            <li className='py-1'>IQAC</li>
+            <Link
+               to='/about-us'
+               className='transition-colors duration-300 hover:text-orange-500'
+               target='_blank'
+            >
+              <li className='py-1'>About Event-Spectra</li>
+            </Link>
+
+            <Link
+               to='#' 
+               className='transition-colors duration-300 hover:text-orange-500'
+               target='_blank'
+            >
+              <li className='py-1'>Founders</li>
+            </Link>
+            
+            <Link
+               to='https://www.youtube.com/channel/UCjC8I3J_s3eRJJiTHTQXasA' 
+               className='transition-colors duration-300 hover:text-orange-500'
+               target='_blank'
+            >
+              <li className='py-1'>Board Of Directors</li>
+            </Link>
+            
+
+
+        
           </ul>
         </div>
 
@@ -42,10 +66,47 @@ const Footer = () => {
       <div className='flex flex-col max-w-[1400px] px-2 py-4 mx-auto justify-between sm:flex-row text-center text-gray-500'>
         <p className='py-4'>© {year} Copyright : Event Spectra</p>
         <div className='flex justify-between sm:w-[300px] pt-4 text-2xl'>
-          <FaFacebook />
-          <FaInstagram />
-          <FaTwitter />
-          <TiSocialPinterest size={30} />
+
+          <Link 
+            to='https://facebook.com/official.kitcoek/ ' 
+            className='transition-colors duration-300 hover:text-orange-500'
+            target='_blank'
+          >
+              <FaFacebook />
+          </Link>
+
+
+          <Link 
+            to='https://www.instagram.com/kitcoek.official/' 
+            className='transition-colors duration-300 hover:text-orange-500'
+            target='_blank'
+          >
+              <FaInstagram />
+          </Link>
+
+          <Link 
+            to='https://twitter.com/officialkitcoek'
+            className='transition-colors duration-300 hover:text-orange-500'
+            target='_blank'
+          >
+            <FaTwitter />
+          </Link>
+          
+          <Link 
+            to='https://www.youtube.com/channel/UCjC8I3J_s3eRJJiTHTQXasA' 
+            className='transition-colors duration-300 hover:text-orange-500'
+            target='_blank'
+          >
+            <FaYoutube />
+          </Link>
+
+          <Link 
+            to='https://api.whatsapp.com/send?phone=+917030861199' 
+            className='transition-colors duration-300 hover:text-orange-500'
+            target='_blank'
+          >
+            <FaWhatsapp />
+          </Link>
         </div>
       </div>
     </div>

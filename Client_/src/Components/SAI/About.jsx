@@ -1,44 +1,39 @@
 // AboutUsPage.js
 
 import React from 'react';
-import img from '../../assets/img1.jpg'
-import img2 from '../../assets/img2.png'
+
 
 const About = () => {
     return (
-        <div className="min-h-screen bg-gray-200  
-        
-        "style={{ backgroundImage: `url(${img2})` }}
-        
-        >
-            <div className="container mx-auto py-20 px-4">
-                <div className="flex flex-wrap items-center justify-center">
-                    <div className="w-full md:w-1/2 md:order-2">
-                        <div className="text-center md:text-left">
-                            {/* Title with attractive font and centered alignment */}
-                            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 ml-48 mb-4">About Us</h1>
-
-                            {/* Styled paragraphs */}
-                            <p className="text-gray-700 leading-relaxed text-lg md:text-xl mb-4">
-                            EMS allows users to plan and schedule events by defining event details such as date, time, location, agenda, and objectives. It may also include tools for setting up recurring events or managing multiple events simultaneously.
-                            </p>
-
-                            <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
-                            EMS provides tools for managing speakers, presenters, and performers, including scheduling, communication, and coordination of their participation in events.                            </p>
-                            <br></br>
-                            <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
-                                This feature assists in selecting and managing event venues, including venue booking, floor planning, seating arrangements, and logistics coordination. feugiat, non sagittis arcu rutrum. Duis
-                                tristique elit id malesuada dignissim.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="w-full md:w-1/2 md:order-1 mb-6 md:mb-0 ">
-                        {/* Adjusted image width and height */}
-                        <img src={img} alt="About Us" className="h-96 w-auto rounded-lg shadow-lg mt-14" />
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div className="pt-16    px-4 py-8 sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-bold mb-4">About Us</h1>
+      <p className="text-lg mb-6">
+        Welcome to Event Spectra! At Event Spectra, we are dedicated to bringing you the latest updates and information about the vibrant and dynamic activities happening at Kolhapur Institute of Technology's College of Engineering, Kolhapur.
+      </p>
+      <p className="text-lg mb-6">
+        Our platform serves as a hub for students, providing a comprehensive view of upcoming events, new club formations, and exciting company drives.
+      </p>
+      <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
+      <p className="text-lg mb-6">
+        We strive to create a seamless experience for students, ensuring they stay informed and engaged with the diverse opportunities available at our institution. Our mission is to foster a sense of community and collaboration by showcasing a spectrum of events and initiatives that enrich the academic and extracurricular journey of every student.
+      </p>
+      <h2 className="text-2xl font-bold mb-4">What We Offer</h2>
+      <ul className="list-disc ml-6 text-lg mb-6">
+        <li>Upcoming Events</li>
+        <li>New Clubs</li>
+        <li>Company Drives</li>
+      </ul>
+      <p className="text-lg mb-6">
+        Our Commitment: Event Spectra is committed to promoting a culture of innovation, collaboration, and lifelong learning. We believe that active participation in extracurricular activities enhances personal growth, fosters creativity, and prepares students for future challenges.
+      </p>
+      <h2 className="text-2xl font-bold mb-4">Join Us</h2>
+      <p className="text-lg mb-6">
+        We invite you to explore Event Spectra and be part of a vibrant community dedicated to learning, growth, and success. Follow us for regular updates, engage with fellow students, and make the most of your college experience at Kolhapur Institute of Technology's College of Engineering, Kolhapur.
+      </p>
+      <p className="text-lg mb-6">
+        For inquiries or collaborations, feel free to reach out to us. Let's create unforgettable experiences together!
+      </p>
+    </div>
     );
 };
 
