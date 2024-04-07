@@ -8,7 +8,9 @@ function ClubList() {
 
     const dispatch = useDispatch()
     const {clubData} = useSelector( state => state.clubs)
+
     console.log(clubData);
+
     async function loadCourses () {
         await dispatch(getAllClubs())
     }
@@ -23,9 +25,7 @@ function ClubList() {
       <BaseLayout>
         <div className='flex flex-wrap gap-10 mb-10 justify-center items-center'>
             {
-              clubData?.map((element) => {
-                return <ClubCard  key={element._id} data={element}/>
-              })
+              clubData?.map((element) =>  <ClubCard  key={element._id} data={element}/> )
             }
         </div>
       </BaseLayout>
