@@ -49,9 +49,9 @@ const Navbar = () => {
   return (
     <div className={`absolute w-full flex justify-between p-4 items-center ${nav ? 'bg-black' : ''}`}>
       <h1 className={`font-bold text-2xl z-20 ${iconAndTextClass}`}>
-        <Link to='/' onClick={() => setNav(false)}>Event-Spectra</Link>
+        <Link to='/' className='transition-colors duration-300 hover:text-orange-500' onClick={() => setNav(false)}>Event-Spectra</Link>
       </h1>
-      <HiMenuAlt3 onClick={handleNav} className={`z-20 cursor-pointer ${iconAndTextClass}`} size={25} />
+      <HiMenuAlt3 onClick={handleNav} className={`transition-colors duration-300 hover:text-orange-400 z-20 cursor-pointer ${iconAndTextClass}`} size={25} />
       <div
         className={
           nav
@@ -60,12 +60,12 @@ const Navbar = () => {
         }
       >
         <ul className='flex flex-col h-full items-center justify-center space-y-4 text-xl'>
-          <li ><Link to='/' onClick={() => setNav(false)}>Home</Link></li>
+          <li ><Link to='/' className='transition-colors duration-300 hover:text-orange-400' onClick={() => setNav(false)}>Home</Link></li>
           {/* <li><Link to='/events' onClick={() => setNav(false)}>Events</Link></li>  */}
-          <li><Link to='/clubs' onClick={() => setNav(false)}>Clubs</Link></li> 
+          <li><Link to='/clubs' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Clubs</Link></li> 
           {
             isLoggedIn && role === 'ADMIN' && (
-              <li><Link to='/club/create-club' onClick={() => setNav(false)}>Create Club</Link></li>
+              <li><Link to='/club/create-club' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Create Club</Link></li>
             )
           }
 
@@ -77,21 +77,21 @@ const Navbar = () => {
             
             (
               <>
-                <li><Link to='/logout' onClick={(e) =>{ setNav(false) ; handleLogout(e)}}>Logout</Link></li>
-                <li><Link to='/user/profile' onClick={() => setNav(false)}>Profile</Link></li>
+                <li><Link to='/logout' className='transition-colors duration-300 hover:text-orange-400'  onClick={(e) =>{ setNav(false) ; handleLogout(e)}}>Logout</Link></li>
+                <li><Link to='/user/profile' className='transition-colors duration-300 hover:text-orange-400' onClick={() => setNav(false)}>Profile</Link></li>
               </>
             ):
             (
               <>
-                <li><Link to='/login' onClick={() => setNav(false)}>Login</Link></li>
-                <li><Link to='/signup' onClick={() => setNav(false)}>Sign Up</Link></li>
+                <li><Link to='/login' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Login</Link></li>
+                <li><Link to='/signup'className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Sign Up</Link></li>
               </>
             ) 
           }
 
           
-          <li><Link to='/about-us' onClick={() => setNav(false)}>About Us</Link></li>
-          <li><Link to='/contact-us' onClick={() => setNav(false)}>Contact Us</Link></li>
+          <li><Link to='/about-us' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>About Us</Link></li>
+          <li><Link to='/contact-us' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Contact Us</Link></li>
         </ul>
       </div>
     </div>
