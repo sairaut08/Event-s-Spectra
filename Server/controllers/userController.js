@@ -284,8 +284,8 @@ const updateUser = async (req,res,next) =>{
             })
 
             if(result){
-                newUser.avatar.public_id = result.public_id 
-                newUser.avatar.secure_url = result.secure_url 
+                userExists.avatar.public_id = result.public_id 
+                userExists.avatar.secure_url = result.secure_url 
 
                 // remove file from server
                 fs.rm(`uploads/${req.file.filename}`)

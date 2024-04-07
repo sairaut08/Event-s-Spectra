@@ -20,7 +20,7 @@ function ProfilePage() {
           <p className="text-gray-600 mb-2 text-center">Email: {userData?.email}</p>
           <p className="text-gray-600 mb-4 text-center">Role: {userData?.role}</p>
           <div className="flex justify-around">
-            <Link to="/edit-profile">
+            <Link to="/user/edit-profile">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Edit Profile
               </button>
