@@ -84,6 +84,19 @@ const register = async(req,res,next) =>{
         message: `User registered successfully`, 
         newUser
     })
+
+    try {
+        const subject = `Welcome to EventSpectra - Your Ultimate Event Management Hub for Kit College`
+        const message = `<h1> Dear ${fullName}, </h1><br>
+        <br>We are thrilled to inform you that your registration for EventSpectra, the premier event management platform for Kit College, has been successfully completed!🎉🎊
+        <br><br>
+       <p> Welcome aboard to a vibrant community dedicated to facilitating seamless participation in various events organized within Kit College. Whether you're looking forward to showcasing your talents, honing your skills, or simply immersing yourself in the enriching campus experience.<p>
+     `
+
+       sendMail(email,subject,message)
+    } catch (error) {
+        console.error('Error :',error.message)
+    }
 }
 
 const login = async (req,res,next) =>{
