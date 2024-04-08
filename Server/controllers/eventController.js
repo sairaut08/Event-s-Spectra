@@ -53,7 +53,7 @@ const createEvent = async (req,res,next) => {
     }
 }
 
-const getAllEvents = async (req,res,next) => {
+const getAllEventsByClubID = async (req,res,next) => {
     try {
         const {clubId} = req.params
 
@@ -101,4 +101,19 @@ const deleteEvent = async (req,res,next) => {
     }
 }
 
-export {createEvent,getAllEvents,deleteEvent}
+const getAllEvents = async (req,res,next) => {
+    try {
+        const events = await  event.find({})
+
+        res.status(200).json({
+            success:true,
+            message: "All events.",
+            events
+        });
+
+    } catch (error) {
+        return next(new AppError(error.message,500))
+    }
+}
+
+export {createEvent,getAllEventsByClubID,deleteEvent,getAllEvents}

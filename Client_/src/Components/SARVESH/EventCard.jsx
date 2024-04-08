@@ -6,7 +6,7 @@ function EventCard ({ data }) {
 
   return (
     <div
-    //   onClick={() => navigate('/club/description/', {state: data})}
+      onClick={() => navigate('/club/event/description/', {state: data})}
       className="text-white w-[22rem] h-[350px] shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700  mt-32 border border-gray-300 transition-transform hover:translate-y-1 hover:shadow-lg"
     >
       <div className="overflow-hidden">

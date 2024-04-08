@@ -2,7 +2,7 @@ import {Router} from 'express'
 import { createClub,removeClub,getAllClubs, getClubById, } from "../controllers/clubsController.js";
 import {isLoggedIn,authorizedRoles} from '../middleware/authMiddleware.js';
 import upload from '../middleware/multerMiddleware.js';
-import { createEvent, deleteEvent, getAllEvents } from '../controllers/eventController.js';
+import { createEvent, deleteEvent, getAllEventsByClubID } from '../controllers/eventController.js';
 import { register, unregister } from '../controllers/registartionController.js';
 
 const router = Router();
@@ -27,7 +27,7 @@ router.route('/:id')
 router.post('/:clubId/addEvent',isLoggedIn,authorizedRoles('ADMIN'),upload.single('thumbnail'),createEvent) //tested
 router.get('/:clubId/events',isLoggedIn,
 // authorizedRoles('ADMIN'),
-getAllEvents) //tested
+getAllEventsByClubID) //tested
 router.delete('/:clubId/events/:eventId',isLoggedIn,authorizedRoles('ADMIN'),deleteEvent) //tested
 
 // registration routes

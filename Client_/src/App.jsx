@@ -13,6 +13,8 @@ import ClubDescription from './Pages/Clubs/ClubDescription'
 import RequireAuth from './Components/Auth/RequireAuth'
 import CreateClub from './Pages/Clubs/CreateClub'
 import EditProfile from './Pages/User/EditProfile'
+import EventDescription from './Pages/Events/EventDescription'
+import EventList from './Pages/Events/EventList'
 
 function App() {
   
@@ -28,7 +30,9 @@ function App() {
         <Route path='/login' element={ <Signin/> } />
         <Route path='/user/profile' element={ <ProfilePage/> } />
         <Route path='/clubs' element={ <ClubList/> } />
+        <Route path='/events' element={ <EventList/> } />
         <Route path='/club/description' element={ <ClubDescription/> } />
+        <Route path='/club/event/description' element={ <EventDescription/> } />
         <Route path='/denied' element={ <AccessDenied/> } />
 
         {/* admin routes */}

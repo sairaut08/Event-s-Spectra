@@ -1,6 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit'
 import authSliceReducer from './Slices/authSlice'
 import clubSliceReducer from './Slices/clubSlice'
+import eventSliceReducer from './Slices/eventSlice'
 
 // for persist-storage
 import storage from 'redux-persist/lib/storage'
@@ -16,7 +17,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
     auth: authSliceReducer ,
-    clubs: clubSliceReducer
+    clubs: clubSliceReducer,
+    events: eventSliceReducer
 })
 
 const persistedReducer = persistReducer(persistConfig,reducer)
