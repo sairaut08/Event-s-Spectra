@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation , useNavigate} from 'react-router-dom';
 import BaseLayout from '../../Layouts/BaseLayout';
 import axiosInstance from '../../Helpers/axiosInstance';
 import EventCard from '../../Components/SARVESH/EventCard';
+import {useSelector} from 'react-redux'
+
 
 function ClubDescription() {
   const { state } = useLocation();
   const [eventDetails, setEventDetails] = useState([]);
+  const navigate = useNavigate()
+
+  const role = useSelector(state => state?.auth?.role)
 
   async function fetchEventDetails() {
     try {
       const response = await axiosInstance.get(`/clubs/${state._id}/events`);
+      // console.log(state);
+      // console.log(`ROLE :${role}`);
       setEventDetails(response.data.events);
     } catch (error) {
       console.log('Error fetching event details:', error);
@@ -39,7 +46,21 @@ function ClubDescription() {
             </h1>
             <h3 className='text-lg md:text-2xl text-orange-500 ml-2'>{state.tagline}</h3>
             <h3 className='text-base md:text-lg mt-10 text-justify ml-2'>{state.description}</h3>
+            
+            {
+              role === 'ADMIN' && (
+                <button
+                  onClick={() => navigate('/club/add-event', {state: state})}
+                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-10"
+                >
+                  Add New Event
+                </button>
+              )
+            }
+
           </div>
+
+
         </section>
 
         <section>
