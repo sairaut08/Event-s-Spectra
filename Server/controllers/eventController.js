@@ -6,14 +6,15 @@ import cloudinary from 'cloudinary'
 const createEvent = async (req,res,next) => {
     try {
         const {clubId} = req.params
-        const {eventName,description} = req.body
+        const {eventName,tagline,description} = req.body
 
-        if(!clubId || !eventName || !description){
+        if(!clubId || !eventName || !description || !tagline){
             return next(new AppError('all fields are required',500))
         }
 
         const newEvent = await event.create({
             eventName,
+            tagline,
             description,
             clubId
         })

@@ -1,80 +1,91 @@
-import React, { useState } from 'react'
-import toast from 'react-hot-toast'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { createClub } from '../../Redux/Slices/clubSlice'
-import BaseLayout from '../../Layouts/BaseLayout'
-import {AiOutlineArrowLeft} from 'react-icons/ai'
+import React, { useEffect, useState } from 'react'
+import {useLocation,Link,useNavigate} from 'react-router-dom'
+import BaseLayout from '../../Layouts/BaseLayout';
+import {useDispatch} from 'react-redux'
+import { addEvent } from '../../Redux/Slices/eventSlice';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-function CreateClub() {
+function AddEvent() {
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [userDetails, setUserDetails] = useState({
-      clubName: "" ,
-      description: "" ,
-      thumbnail : "" ,
-      tagline: "" ,
-      previewImage: ""
-  })
+    const {state} = useLocation()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-  function handleImageUpload (e) {
-    e.preventDefault()
-    const uploadedImage = e.target.files[0]
-    
-    if(uploadedImage){
-      const fileReader = new FileReader()
-      fileReader.readAsDataURL(uploadedImage)
-      fileReader.addEventListener('load',()=>{
-        setUserDetails({
-          ...userDetails ,
-          previewImage: fileReader.result ,
-          thumbnail: uploadedImage
-        })
-      })
-    }
-
-  }
-
-  function handleUserInput (e) {
-    const {name,value} = e.target
-    setUserDetails({
-      ...userDetails ,
-      [name] : value
+    const [eventDetails, setEventDetails] = useState({
+        eventName: '' ,
+        tagline: '' ,
+        description: '',
+        previewImage: '' ,
+        thumbnail: ''
     })
-  }
 
-  async function handleFormSubmit (e) {
-    e.preventDefault()
+    function handleUserInput(e){
 
-    if(!userDetails.clubName || !userDetails.description || !userDetails.tagline ){
-      toast.error('All fields are required')
-      return
+        const {name, value} = e.target
+
+        setEventDetails({
+            ...eventDetails ,
+            [name]: value
+        })
     }
 
-    // form-data is necessary whenever we need to send image at backend else data can be passed normally !
-    const formData = new FormData()
-
-    formData.append('clubName', userDetails.clubName)
-    formData.append('tagline', userDetails.tagline)
-    formData.append('description', userDetails.description)
-    formData.append('thumbnail', userDetails.thumbnail)
-
-    const response = await dispatch(createClub(formData))
-    // console.log(response);
-
-    if(response?.payload?.success){
-      setUserDetails({
-        clubName: "" ,
-        description: "" ,
-        thumbnail : "" ,
-        tagline: "" ,
-        previewImage: ""
-      })
-      navigate('/clubs')
+    function handleImageUpload(e){
+        // e.preventDefault()
+        const uploadedImage = e.target.files[0]
+        
+        if(uploadedImage){
+          const fileReader = new FileReader()
+          fileReader.readAsDataURL(uploadedImage)
+          fileReader.addEventListener('load',()=>{
+            setEventDetails({
+              ...eventDetails ,
+              previewImage: fileReader.result ,
+              thumbnail: uploadedImage
+            })
+          })
+        }
     }
 
-  }
+    async function handleFormSubmit(e){
+        e.preventDefault()
+        
+        if(!eventDetails.eventName || !eventDetails.description || !eventDetails.tagline ){
+            toast.error('All fields are required')
+            return
+          }
+
+        const formData = new FormData()
+
+        formData.append('eventName', eventDetails.eventName)
+        formData.append('tagline', eventDetails.tagline)
+        formData.append('description', eventDetails.description)
+        formData.append('thumbnail', eventDetails.thumbnail)
+        formData.append('clubId', state._id)
+
+        // console.log(`FORMDATA: ${formData.get('tagline')}`);
+          const response = await dispatch(addEvent(formData))
+
+          if(response?.payload?.success){
+             setEventDetails({
+                eventName: '' ,
+                tagline: '' ,
+                description: '',
+                previewImage: '' ,
+                thumbnail: ''
+             })
+
+            navigate('/events')
+          }
+
+
+
+
+
+    }
+
+    useEffect(()=>{
+        console.log(state);
+    },[])
 
   return (
     <BaseLayout>
@@ -88,7 +99,7 @@ function CreateClub() {
           </Link>
 
           <h1 className='text-center text-2xl font-bold mb-8'>
-            Create Course
+            Add Event
           </h1>
 
           <main className='grid grid-cols-2 gap-x-10'>
@@ -96,14 +107,14 @@ function CreateClub() {
                   <div >
                       <label htmlFor="image_uploads" className='cursor-pointer'>
                         {
-                          userDetails.previewImage? (
+                          eventDetails.previewImage? (
                             <img 
                             className='w-full h-44 m-auto border'
-                              src={userDetails.previewImage} 
+                              src={eventDetails.previewImage} 
                               alt="club thumbnail" />
                           ) : (
                             <div className='w-full h-44 m-auto flex items-center justify-center border'>
-                              <h1 className=' text-lg text-gray-400'>Upload your course thumbnail</h1>
+                              <h1 className=' text-lg text-gray-400'>Upload your event thumbnail</h1>
                             </div>
                           )
                         }
@@ -118,15 +129,15 @@ function CreateClub() {
                       />
                   </div>
                   <div className="flex flex-col gap-2 mt-4">
-                    <label htmlFor="clubName" className='text-lg font-semibold'>Club Name </label>
+                    <label htmlFor="eventName" className='text-lg font-semibold'>Event Name </label>
                     <input 
                       type="text" 
                       required
-                      name='clubName'
-                      id='clubName'
-                      placeholder='Enter Club Name'
+                      name='eventName'
+                      id='eventName'
+                      placeholder='Enter Event Name'
                       className='bg-transparent px-2 py-1 border'
-                      value={userDetails.clubName}
+                      value={eventDetails.eventName}
                       onChange={handleUserInput}
                     />
                   </div>
@@ -143,7 +154,7 @@ function CreateClub() {
                       id='tagline'
                       placeholder='Enter tagline'
                       className='bg-transparent px-2 py-1 border'
-                      value={userDetails.tagline}
+                      value={eventDetails.tagline}
                       onChange={handleUserInput}
                     />
                   </div> 
@@ -156,7 +167,7 @@ function CreateClub() {
                       id='description'
                       placeholder='Enter description'
                       className='bg-transparent px-2 py-1 border resize-none '
-                      value={userDetails.description}
+                      value={eventDetails.description}
                       onChange={handleUserInput}
                       rows='6'
                     />
@@ -169,7 +180,7 @@ function CreateClub() {
           <button 
             type='submit' 
             className='w-full bg-yellow-600 hover:bg-yellow-300 transition-all ease-in-out duration-300 mt-4 py-2 rounded-sm font-semibold text-lg cursor-pointer'>
-              Create Course
+              Add Event
           </button>
       </form>
       </div>
@@ -177,4 +188,4 @@ function CreateClub() {
   )
 }
 
-export default CreateClub
+export default AddEvent

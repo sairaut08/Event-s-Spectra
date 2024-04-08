@@ -15,6 +15,7 @@ import CreateClub from './Pages/Clubs/CreateClub'
 import EditProfile from './Pages/User/EditProfile'
 import EventDescription from './Pages/Events/EventDescription'
 import EventList from './Pages/Events/EventList'
+import AddEvent from './Pages/Events/AddEvent'
 
 function App() {
   
@@ -38,6 +39,7 @@ function App() {
         {/* admin routes */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>} >
             <Route path='club/create-club' element={ <CreateClub/>} />
+            <Route path='club/add-event' element={ <AddEvent/>} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>} >

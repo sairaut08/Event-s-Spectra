@@ -22,6 +22,25 @@ export const getAllEvents = createAsyncThunk('/events/get', async () => {
     }
 })
 
+export const addEvent = createAsyncThunk('/events/add-event' , async(data) => {
+    try {
+       
+        console.log(`DATA :${data.get('clubId')}`);
+        
+        const response = axiosInstance.post(`/clubs/${data.get('clubId')}/addEvent`,data)
+
+        toast.promise(response,{
+            loading: 'Adding Event' ,
+            error: 'Error in creating event',
+            success: 'Event added successfully'
+        })
+
+        return (await response).data
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
 const eventSlice = createSlice({
     name: 'events',
     initialState,
@@ -32,6 +51,10 @@ const eventSlice = createSlice({
                 state.eventData = [...action.payload]
             }
         })
+
+        // builder.addCase(addEvent.fulfilled, (state, action) => {
+
+        // })
     }
 })
 

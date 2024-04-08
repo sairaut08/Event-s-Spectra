@@ -16,7 +16,7 @@ const eventSchema = new mongoose.Schema({
     },
     tagline:{
         type: String,
-        required : [true,'Description is required'],
+        required : [true,'Tagline is required'],
     },
     description:{
         type: String,
