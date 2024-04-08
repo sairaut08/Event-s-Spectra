@@ -62,7 +62,9 @@ const Navbar = () => {
         <ul className='flex flex-col h-full items-center justify-center space-y-4 text-xl'>
           <li ><Link to='/' className='transition-colors duration-300 hover:text-orange-400' onClick={() => setNav(false)}>Home</Link></li>
           {/* <li><Link to='/events' onClick={() => setNav(false)}>Events</Link></li>  */}
-          <li><Link to='/clubs' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Clubs</Link></li> 
+          <li><Link to='/clubs' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Clubs</Link></li>
+          <li><Link to='/events' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Events</Link></li>
+
           {
             isLoggedIn && role === 'ADMIN' && (
               <li><Link to='/club/create-club' className='transition-colors duration-300 hover:text-orange-400'  onClick={() => setNav(false)}>Create Club</Link></li>
