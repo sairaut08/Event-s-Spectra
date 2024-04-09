@@ -16,6 +16,7 @@ import EditProfile from './Pages/User/EditProfile'
 import EventDescription from './Pages/Events/EventDescription'
 import EventList from './Pages/Events/EventList'
 import AddEvent from './Pages/Events/AddEvent'
+import ChangePassword from './Pages/User/ChangePassword'
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
         <Route path='/signup' element={ <Signup/> } />
         <Route path='/login' element={ <Signin/> } />
         <Route path='/user/profile' element={ <ProfilePage/> } />
+        <Route path='/user/change-password' element={ <ChangePassword/> } />
         <Route path='/clubs' element={ <ClubList/> } />
         <Route path='/events' element={ <EventList/> } />
         <Route path='/club/description' element={ <ClubDescription/> } />
