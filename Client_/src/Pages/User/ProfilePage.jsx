@@ -25,7 +25,7 @@ function ProfilePage() {
                 Edit Profile
               </button>
             </Link>
-            <Link to="/change-password">
+            <Link to="/user/change-password">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Change Password
               </button>

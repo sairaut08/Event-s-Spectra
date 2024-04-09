@@ -254,7 +254,7 @@ const changePassword = async (req,res,next) =>{
     const isPasswordValid = await userExists.comparePassword(oldPassword)
 
     if(!isPasswordValid){
-        next(new AppError(500,`Old password invalid`))
+        return next(new AppError(500,`Old password invalid`))
     }
 
     userExists.password = newPassword   
