@@ -23,7 +23,7 @@ const register = async (req,res,next) => {
 
        console.log('evet',eventInfo);
        console.log('club info:',clubInfo);
-
+       
        if(alreadyExists){
             if (alreadyExists.eventId.includes(eventId)) {
                 return next(new AppError('already registered to this event',500))
@@ -50,13 +50,14 @@ const register = async (req,res,next) => {
             success: true ,
             message: 'registered successfully'
         })
-
+   //     eventInfo.thumbnail.secure_url
         const subject = `Confirmation of Event Registration - ${eventInfo.eventName}`
         const message = `<h1> Dear ${fullName},</h1>
                         <h4>
                         We are delighted to inform you that your registration for the upcoming event, ${eventInfo.eventName} has been successfully received and confirmed!
-
+                        
                         </h4><br>
+                        <img src="${ eventInfo.thumbnail.secure_url}" alt="Image"> 
                         <p>Event Details:
 
                         <li>Club Name: ${clubInfo.clubName}</li>
@@ -78,7 +79,8 @@ const register = async (req,res,next) => {
                         Team ${clubInfo.clubName}
                         `
         try {
-            await sendMail(email,subject,message)
+             await sendMail(email,subject,message)
+             console.log('Mail Sent Successfully....');
         } catch (error) {
             console.error(`Error :`,error.message);
         }

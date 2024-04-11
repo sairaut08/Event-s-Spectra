@@ -1,15 +1,14 @@
 import nodemailer from 'nodemailer'
 import {google} from 'googleapis'
-
-const CLIENT_ID = '992511193324-172vsgc76p33iiba773daqsudbk75c5u.apps.googleusercontent.com'
-const CLIENT_SECRET = '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'
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
-const REFRESH_TOKEN = '1//04wxu4BtzbYq8CgYIARAAGAQSNwF-L9IrNB9fHrwe_onWwEcyTaKEAPmkBujYHEwGzy3HxgU-aOxnMKX8pAs7gdw1evmufj9NWK4'
+import { config } from 'dotenv';
+config();
 
 
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI)
 
-oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN})
+
+const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URI);
+
+oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});
 
 
 async function sendMail(email,subject,message) {
@@ -21,10 +20,10 @@ async function sendMail(email,subject,message) {
             auth : {
                 type : 'OAUTH2',
                 user : 'eventspectra7781@gmail.com',
-                clientId : CLIENT_ID,
-                clientSecret : CLIENT_SECRET,
-                refreshToken : REFRESH_TOKEN,
-                accessToken : accessToken
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN,
+                accessToken: accessToken
             }
         })
 
@@ -42,11 +41,11 @@ async function sendMail(email,subject,message) {
         };
 
         const result = await transport.sendMail(mailOptions);
-
+        console.log('Mail Send Successfully!!');
         return result
 
     } catch (error) {
-        return error
+        console.log(error.message)
     }
 }
 
